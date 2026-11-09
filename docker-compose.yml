@@ -4,7 +4,7 @@ services:
   nginx:
     build: ./nginx
     image: nginx
-    container_name: "nginx___container"
+    container_name: "nginx_____container"
     ports:
       - "8081:80"
     restart: always
