@@ -1,12 +1,10 @@
 version: "3.8"
 
-
-
 services:
   nginx:
     build: ./nginx
     image: nginx
-    container_name: "nginx_____container"
+    container_name: "nginx_container"
     ports:
       - "8081:80"
     restart: always
@@ -37,7 +35,7 @@ services:
 
   db:
     image: mysql
-    container_name: "db_____container"
+    container_name: "db_container"
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=test_db
