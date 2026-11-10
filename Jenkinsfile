@@ -1,9 +1,17 @@
+@Library('Shared') _
 pipeline {
     agent {
         label 'docker-agent'
     }
 
     stages {
+        stage('Hello'){
+            steps{
+                script{
+                    hello()
+                }
+            }
+        }
         stage('Code') {
             steps {
                 sh 'whoami'
