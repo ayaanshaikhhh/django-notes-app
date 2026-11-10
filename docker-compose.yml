@@ -15,14 +15,15 @@ services:
 
   django_app:
     image: ayaannnn/notes-app-jen:1.0
-    container_name: "django_container"
+    container_name: django_container
     ports:
       - "8000:8000"
     command: sh -c "python manage.py migrate --noinput && gunicorn notesapp.wsgi --bind 0.0.0.0:8000"
     env_file:
-      - ".env"
+      - .env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8000/admin || exit 1"]
@@ -35,10 +36,10 @@ services:
 
   db:
     image: mysql
-    container_name: "db_container"
+    container_name: db_container
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=test_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
     volumes:
       - ./data/mysql/db:/var/lib/mysql
     healthcheck:
@@ -49,6 +50,7 @@ services:
       start_period: 60s
     networks:
       - notes-app-nw
+
 
 networks:
   notes-app-nw:
