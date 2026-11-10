@@ -22,7 +22,7 @@ pipeline {
         stage('Build') {
            steps{
                script{
-                   build()
+                   build("ayaannnn","notes-app-jen","1.0")
                }
            }
         }
