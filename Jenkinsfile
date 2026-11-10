@@ -20,9 +20,11 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                sh 'docker build -t notes-app:1.0 .'
-            }
+           steps{
+               script{
+                   build()
+               }
+           }
         }
 
         stage('Push to DockerHub') {
