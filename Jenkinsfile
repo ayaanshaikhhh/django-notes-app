@@ -29,24 +29,8 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'DockerHubCred',
-                        usernameVariable: 'DOCKERHUB_USER',
-                        passwordVariable: 'DOCKERHUB_PASS'
-                    )
-                ]) {
-                    sh '''
-                        set -e
-
-                        echo "$DOCKERHUB_PASS" | docker login \
-                            -u "$DOCKERHUB_USER" --password-stdin
-
-                        docker tag notes-app:1.0 ayaannnn/notes-app-jen:1.0
-                        docker push ayaannnn/notes-app-jen:1.0
-
-                        docker logout
-                    '''
+                script{
+                    dockerhub_push()
                 }
             }
         }
